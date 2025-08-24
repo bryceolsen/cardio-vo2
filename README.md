@@ -12,7 +12,6 @@ compares them to **Apple Watch “active calories”** with a conservative ±28%
 ## Key features
 - **ACSM treadmill & stepping equations** (gross VO₂)
 - **Reproducible kcal·min⁻¹** conversion at subject mass (80.3 kg)
-- **Apple Watch error simulation** (uniform ±28%, seeded)
 - **Polished tables & plots** (exported HTML for one-click review)
 - **Tested core functions** (PyTest) to ensure monotonic/units sanity
 
