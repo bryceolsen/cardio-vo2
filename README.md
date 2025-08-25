@@ -1,22 +1,24 @@
-# cardio-vo2
-Estimate and compare energy expenditure on treadmill incline walking and StairMaster using ACSM metabolic equations and Apple Watch readings.
+# PROJECT-X — Energy Cost & Efficiency of Incline Treadmill vs StairMaster
 
-Estimate and compare calorie expenditure on treadmill incline walking and StairMaster workouts
-using ACSM metabolic equations and Apple Watch readings with uncertainty modeling.
+Measure and compare the energy cost of **incline treadmill walking** and **StairMaster** using **Apple Watch “Active” kcal/min (measured by me)** and **ACSM metabolic equations**, then compute **mechanical power** and **mechanical efficiency** to guide training.
 
-## Why this project?
-Most wearables misestimate energy expenditure. This repo builds a transparent,
-reproducible pipeline that derives **theoretical kcal·min⁻¹** from ACSM equations and
-compares them to **Apple Watch “active calories”** with a conservative ±28% error band.
+---
 
-## Key features
-- **ACSM treadmill & stepping equations** (gross VO₂)
-- **Reproducible kcal·min⁻¹** conversion at subject mass (80.3 kg)
-- **Polished tables & plots** (exported HTML for one-click review)
-- **Tested core functions** (PyTest) to ensure monotonic/units sanity
+## TL;DR (Executive Summary)
 
-## Skills demonstrated
-Python • NumPy/Pandas • Matplotlib • scientific computing • uncertainty modeling •
-reproducible notebooks (nbconvert) • testing • documentation
+- **Data:** Real Apple Watch *Active kcal/min* readings taken during treadmill and StairMaster sessions, logged to CSV. Multiple body masses included. StairMaster step height fixed at **0.2032 m**.
+- **Theory:** ACSM walking & stepping equations → convert VO₂ to **kcal/min (gross)** → subtract rest (3.5 mL·kg⁻¹·min⁻¹) to get **NET** (comparable to AW Active).
+- **Power & Efficiency:**  
+  - Mechanical power: treadmill \(P_\mathrm{mech}=m g v \cdot \mathrm{grade}\), stairs \(P_\mathrm{mech}=m g h \cdot (\mathrm{SPM}/60)\).  
+  - Metabolic power \(P_\mathrm{met}\) from kcal/min (1 kcal·min⁻¹ ≈ 69.78 W).  
+  - **Efficiency** \( \eta = P_\mathrm{mech}/P_\mathrm{met} \).
+- **Findings:**  
+  1) **StairMaster (theory)** efficiency is ~constant **≈ 0.138 (13.8%)** when step height is fixed (mass & SPM cancel in the ratio).  
+  2) **Treadmill** efficiency varies by condition (≈ **0.10–0.25** here) and generally **increases with speed & grade**.  
+  3) **Mass-invariant efficiency:** for a fixed condition, η is ~unchanged across masses (both numerator/denominator scale with mass).  
+  4) At **0% grade** the vertical mechanical work is ~0 → **vertical efficiency is N/A (shows as 0)** even though metabolic cost is positive.
 
-## Repo structure
+---
+
+## Repository Layout
+
