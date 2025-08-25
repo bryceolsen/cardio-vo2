@@ -46,22 +46,22 @@ project-x/
 - `g` = 9.80665 **m/s²** (gravity)
 
 ### ACSM treadmill (walking)
-VO2_gross (mL·kg⁻¹·min⁻¹) = 3.5 + 0.1·S + 1.8·S·G
+- VO2_gross (mL·kg⁻¹·min⁻¹) = 3.5 + 0.1·S + 1.8·S·G
 
 ### ACSM stepping (stairs)
-VO2_gross (mL·kg⁻¹·min⁻¹) = 3.5 + 0.2·SPM + 2.4·SPM·h
+- VO2_gross (mL·kg⁻¹·min⁻¹) = 3.5 + 0.2·SPM + 2.4·SPM·h
 
 ### Convert VO₂ to kcal/min (NET)
-VO2_net (mL·kg⁻¹·min⁻¹) = VO2_gross − 3.5
-kcal/min = (VO2_net / 1000) · m · 5
+- VO2_net (mL·kg⁻¹·min⁻¹) = VO2_gross − 3.5
+- kcal/min = (VO2_net / 1000) · m · 5
 
 ### Powers
-Metabolic power: P_met (W) = (kcal/min) × 69.78
-Treadmill mechanical: P_mech (W) = m · g · v · G
-Stair mechanical: P_mech (W) = m · g · h · (SPM / 60)
+- Metabolic power: P_met (W) = (kcal/min) × 69.78
+- Treadmill mechanical: P_mech (W) = m · g · v · G
+- Stair mechanical: P_mech (W) = m · g · h · (SPM / 60)
 
 ### Efficiency (vertical)
-η = P_mech / P_met
+- η = P_mech / P_met
 
 ---
 
