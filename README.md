@@ -99,8 +99,8 @@ jupyter notebook  # or jupyter lab
 - **Device calibration mindset (optional):** if your Apple Watch consistently over/underestimates for a condition, note a personal correction factor in your analysis.
 
 **Economy example (numbers rounded):** hold **150 W** vertical work.
-- If `η = 0.14` → `P_met ≈ 150/0.14 = 1070 W` → **15.3 kcal/min**  
-- If `η = 0.20` → `P_met ≈ 150/0.20 = 750 W`  → **10.8 kcal/min**  
+- If efficiency `η = 0.14` → `P_met ≈ 150/0.14 = 1070 W` → **15.3 kcal/min**  
+- If efficiency `η = 0.20` → `P_met ≈ 150/0.20 = 750 W`  → **10.8 kcal/min**  
 Same vertical work, ~**30% fewer kcal/min** at the more efficient setting.
 
 ---
