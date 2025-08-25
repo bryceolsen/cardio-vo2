@@ -78,13 +78,6 @@ jupyter notebook  # or jupyter lab
 # Ensure data paths point to files in /data/
 ```
 
-**Saving figures (inside the notebook):**
-```python
-from pathlib import Path
-Path("figures").mkdir(exist_ok=True)
-fig.savefig("figures/fig_treadmill_efficiency_vs_grade.png", dpi=300, bbox_inches="tight")
-```
-
 ---
 
 ## Findings (efficiency)
