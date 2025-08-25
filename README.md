@@ -110,7 +110,3 @@ Same vertical work, ~**30% fewer kcal/min** at the more efficient setting.
 Wearable algorithm variance, handrail use, footwear/surface, and individual biomechanics. At 0% grade, vertical efficiency isn’t meaningful (mechanical power ≈ 0).
 
 ---
-
-## License
-
-MIT (or your choice).
