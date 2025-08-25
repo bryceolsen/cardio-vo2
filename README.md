@@ -1,4 +1,4 @@
-# PROJECT-X — Energy Cost & Efficiency of Incline Treadmill vs StairMaster
+# CARDIO VO2 — Energy Cost & Efficiency of Incline Treadmill vs StairMaster
 
 Measure and compare the energy cost of **incline treadmill walking** and **StairMaster** using **Apple Watch “Active” kcal/min (measured by me)** and **ACSM metabolic equations**, then compute **mechanical power** and **mechanical efficiency** to guide training.
 
@@ -6,17 +6,12 @@ Measure and compare the energy cost of **incline treadmill walking** and **Stair
 
 ## TL;DR (Executive Summary)
 
-- **Data:** Real Apple Watch *Active kcal/min* readings taken during treadmill and StairMaster sessions, logged to CSV. Multiple body masses included. StairMaster step height fixed at **0.2032 m**.
-- **Theory:** ACSM walking & stepping equations → convert VO₂ to **kcal/min (gross)** → subtract rest (3.5 mL·kg⁻¹·min⁻¹) to get **NET** (comparable to AW Active).
-- **Power & Efficiency:**  
-  - Mechanical power: treadmill \(P_\mathrm{mech}=m g v \cdot \mathrm{grade}\), stairs \(P_\mathrm{mech}=m g h \cdot (\mathrm{SPM}/60)\).  
-  - Metabolic power \(P_\mathrm{met}\) from kcal/min (1 kcal·min⁻¹ ≈ 69.78 W).  
-  - **Efficiency** \( \eta = P_\mathrm{mech}/P_\mathrm{met} \).
-- **Findings:**  
-  1) **StairMaster (theory)** efficiency is ~constant **≈ 0.138 (13.8%)** when step height is fixed (mass & SPM cancel in the ratio).  
-  2) **Treadmill** efficiency varies by condition (≈ **0.10–0.25** here) and generally **increases with speed & grade**.  
-  3) **Mass-invariant efficiency:** for a fixed condition, η is ~unchanged across masses (both numerator/denominator scale with mass).  
-  4) At **0% grade** the vertical mechanical work is ~0 → **vertical efficiency is N/A (shows as 0)** even though metabolic cost is positive.
+- **Data:** Real Apple Watch *Active kcal/min* recorded on treadmill + StairMaster; multiple body masses; Stair step height fixed at **0.2032 m**.  
+- **Theory:** ACSM walking & stepping → VO₂ (gross) → subtract resting 3.5 to get **NET** kcal/min (comparable to AW Active).  
+- **Efficiency:**  
+  - **StairMaster (theory)** is ~constant **≈ 0.138 (13.8%)** at fixed step height (mass & SPM cancel in the ratio).  
+  - **Treadmill** efficiency varies by condition (≈ **0.10–0.25** here) and generally increases with **speed & grade**. At **0% grade**, vertical mechanical work ≈ 0 → vertical efficiency is effectively **N/A (0)** even though metabolic cost is > 0.  
+- **Mass effect:** For a fixed condition, η is ~mass-invariant (both mech & met powers scale ~linearly with mass).
 
 ---
 
@@ -42,19 +37,31 @@ project-x/
 
 ## Methods (brief)
 
-**ACSM treadmill (walking)**  
-- \( S = \text{speed}_{\text{mph}} \times 26.8224\ \mathrm{m·min^{-1}} \), \( G = \text{grade} / 100 \)  
-- \( \mathrm{VO}_2^\text{gross} = 3.5 + 0.1S + 1.8SG \) (mL·kg⁻¹·min⁻¹)
+### Notation (units)
+- `S` = treadmill speed in **m/min** = `mph × 26.8224`
+- `G` = grade as **fraction** = `grade_percent / 100`
+- `v` = treadmill speed in **m/s** = `mph × 0.44704`
+- `h` = step height in **m** (StairMaster) = `0.2032`
+- `m` = body mass in **kg`
+- `g` = 9.80665 **m/s²** (gravity)
 
-**ACSM stepping (stairs)**  
-- \( \mathrm{VO}_2^\text{gross} = 3.5 + 0.2\cdot \mathrm{SPM} + 2.4\cdot \mathrm{SPM}\cdot h \)
+### ACSM treadmill (walking)
+VO2_gross (mL·kg⁻¹·min⁻¹) = 3.5 + 0.1·S + 1.8·S·G
 
-**Convert to NET & power**  
-- \( \mathrm{VO}_2^\text{net} = \mathrm{VO}_2^\text{gross} - 3.5 \)  
-- \( \text{kcal/min} = \mathrm{VO}_2(\mathrm{L/min}) \times 5 \) where \( \mathrm{VO}_2(\mathrm{L/min}) = \mathrm{VO}_2(\mathrm{mL·kg^{-1}·min^{-1}}) \times \frac{m_{\text{kg}}}{1000} \)  
-- \( P_\mathrm{met} = \text{kcal/min} \times 69.78\ \mathrm{W} \)  
-- Treadmill \( P_\mathrm{mech}=m g v G \) ; Stair \( P_\mathrm{mech}=m g h (\mathrm{SPM}/60) \)  
-- Efficiency \( \eta = P_\mathrm{mech}/P_\mathrm{met} \). For level walking (0% grade), \(P_\mathrm{mech}\approx 0\) → η is effectively N/A.
+### ACSM stepping (stairs)
+VO2_gross (mL·kg⁻¹·min⁻¹) = 3.5 + 0.2·SPM + 2.4·SPM·h
+
+### Convert VO₂ to kcal/min (NET)
+VO2_net (mL·kg⁻¹·min⁻¹) = VO2_gross − 3.5
+kcal/min = (VO2_net / 1000) · m · 5
+
+### Powers
+Metabolic power: P_met (W) = (kcal/min) × 69.78
+Treadmill mechanical: P_mech (W) = m · g · v · G
+Stair mechanical: P_mech (W) = m · g · h · (SPM / 60)
+
+### Efficiency (vertical)
+η = P_mech / P_met
 
 ---
 
@@ -80,12 +87,28 @@ fig.savefig("figures/fig_treadmill_efficiency_vs_grade.png", dpi=300, bbox_inche
 
 ---
 
+## Findings (efficiency)
+
+1. **StairMaster (theory)** ≈ **0.138** constant at step height **0.2032 m** (mass & SPM cancel).  
+2. **Treadmill** η varies by condition (≈ **0.10–0.25** here) and rises with **speed & grade**; at 0% grade, vertical η is **N/A (0)**.  
+3. **Mass-invariant η** per condition (both numerator & denominator scale ~linearly with mass).  
+4. **Mode choice by goal:**  
+   - **Economy/rehab/hiking:** pick **higher-efficiency** settings for the same vertical power (lower kcal/min).  
+   - **Fat-loss:** prioritize **kcal/min** (steeper grade / higher SPM at safe RPE).
+
+---
+
 ## Applications
 
-- **Fat-loss (max kcal/min):** choose conditions with higher **NET kcal/min** (steeper grades / higher SPM) at a safe RPE. Efficiency is diagnostic but not the target.
-- **Economy / rehab:** for a given vertical power, pick **higher-efficiency** settings (often moderate treadmill grade at steady speed, or StairMaster with SPM tuned to your target). Lower metabolic cost → longer sustainable efforts.
-- **Hiking prep:** match target **vertical speed** (treadmill \(v\cdot G\), stair \( \mathrm{SPM}\cdot h / 60 \)); progress time at target before increasing the target.
-- **Device calibration mindset:** if your Apple Watch consistently over/underestimates for a condition, you can apply a personal correction factor in analysis (optional).
+- **Fat-loss (max kcal/min):** choose conditions with higher **NET kcal/min** (steeper grades / higher SPM) at a safe RPE. Efficiency is diagnostic but not the target.  
+- **Economy / rehab:** for a given vertical power, pick **higher-efficiency** settings (often moderate treadmill grade at steady speed, or StairMaster with SPM tuned to your target). Lower metabolic cost → longer sustainable efforts.  
+- **Hiking prep:** match target **vertical speed** (treadmill `v·G`, stair `SPM·h/60`); progress time at target before increasing the target.  
+- **Device calibration mindset (optional):** if your Apple Watch consistently over/underestimates for a condition, note a personal correction factor in your analysis.
+
+**Economy example (numbers rounded):** hold **150 W** vertical work.
+- If `η = 0.14` → `P_met ≈ 150/0.14 = 1070 W` → **15.3 kcal/min**  
+- If `η = 0.20` → `P_met ≈ 150/0.20 = 750 W`  → **10.8 kcal/min**  
+Same vertical work, ~**30% fewer kcal/min** at the more efficient setting.
 
 ---
 
