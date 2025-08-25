@@ -1,6 +1,6 @@
 
 """
-projectx_utils.py — Helpers for PROJECT-X
+cardio-vo2-utils.py — Helpers for cardio-vo2
 
 Functions included:
 - ACSM equations (treadmill & stair), kcal/min conversions
